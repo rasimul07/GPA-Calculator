@@ -1,8 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
+require('dotenv').config();
+const DATABASE = process.env.DATABASE
 
+console.log(typeof(DATABASE));
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 const cors = require('cors');
 app.use(express.json());
 app.use(cors());
@@ -11,7 +14,7 @@ const userRouter = require('./routes/user');
 app.use('/user', userRouter);
 
 
-mongoose.connect('mongodb+srv://rasimulislam722:eRE8r3Rq3CBHhxRK@cluster0.khqazcv.mongodb.net/gpa', { useNewUrlParser: true, useUnifiedTopology: true });
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
 })
